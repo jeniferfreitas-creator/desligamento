@@ -1,0 +1,432 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Entrevista de Desligamento</title>
+<style>
+:root{--bg:#f6f5f2;--card:#fff;--ink:#1d2321;--mute:#66706b;--line:#e2e0da;--acc:#17232a;--acc2:#e6ebee;--warn:#a5482b;--warn2:#fbece6}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#151816;--card:#1e2320;--ink:#e8ece9;--mute:#9aa49e;--line:#323a35;--acc:#5a8aa8;--acc2:#1f2b33;--warn:#e08a6c;--warn2:#3a2620}}
+:root[data-theme="dark"]{--bg:#151816;--card:#1e2320;--ink:#e8ece9;--mute:#9aa49e;--line:#323a35;--acc:#5a8aa8;--acc2:#1f2b33;--warn:#e08a6c;--warn2:#3a2620}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}
+header{background:#17232a;color:#fff;padding:22px max(16px,calc((100% - 928px)/2)) 0;position:relative;overflow:hidden}header:after{content:"";position:absolute;right:-80px;top:-90px;width:260px;height:260px;border-radius:50%;background:rgba(255,255,255,.05);pointer-events:none}#hlogo{height:28px;display:block;margin-bottom:14px}h1{font-size:23px;margin:0;letter-spacing:-.01em}header p{color:rgba(255,255,255,.7);margin:4px 0 16px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:600}header nav{border-bottom:0;position:relative;z-index:1}header nav button{color:rgba(255,255,255,.65)}header nav button:hover{color:#fff}header nav button.on{color:#fff;border-color:#8fb3c7}
+nav{display:flex;gap:4px;overflow-x:auto;border-bottom:1px solid var(--line)}nav button{background:none;border:0;padding:10px 14px;color:var(--mute);font:inherit;cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap}nav button.on{color:var(--acc);border-color:var(--acc);font-weight:600}
+main{max-width:960px;margin:auto;padding:16px}section{display:none}section.on{display:block}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:18px;margin-bottom:14px}.card h2{font-size:17px;margin:0 0 4px}.card .sub{color:var(--mute);font-size:13px;margin:0 0 14px}
+.step{display:inline-block;font-size:12px;font-weight:700;color:var(--acc);letter-spacing:.05em;text-transform:uppercase;margin-bottom:2px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.q{margin-top:16px}.q>label,.q>.lbl{display:block;font-weight:600;margin-bottom:6px}.q small{display:block;color:var(--mute);font-weight:400;font-size:13px;margin:-4px 0 6px}
+label.f{display:block;font-size:13px;color:var(--mute);margin-bottom:4px}
+input,select,textarea{width:100%;padding:9px;border:1px solid var(--line);border-radius:7px;background:var(--bg);color:var(--ink);font:inherit}textarea{min-height:70px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}.chips button{border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:20px;padding:7px 13px;font:inherit;font-size:14px;cursor:pointer}.chips button.on{background:var(--acc);border-color:var(--acc);color:#fff}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden;margin-bottom:10px}.seg button{border:0;background:var(--card);color:var(--ink);padding:8px 14px;font:inherit;cursor:pointer}.seg button.on{background:var(--acc);color:#fff}
+.tema{font-size:12px;font-weight:700;color:var(--mute);text-transform:uppercase;letter-spacing:.05em;margin:18px 0 4px}
+.af{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;padding:9px 0;border-bottom:1px solid var(--line)}.af:last-child{border:0}
+.esc{display:flex;gap:3px}.esc button{width:38px;height:34px;border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:6px;cursor:pointer;font-size:16px}.esc button.on{background:var(--acc);border-color:var(--acc);color:#fff}
+.legenda{display:flex;justify-content:flex-end;gap:14px;font-size:12px;color:var(--mute)}
+.nps{display:grid;grid-template-columns:repeat(11,1fr);gap:3px}.nps button{padding:9px 0;border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:6px;cursor:pointer;font:inherit}.nps button.on{background:var(--acc);color:#fff;border-color:var(--acc)}.npsl{display:flex;justify-content:space-between;font-size:12px;color:var(--mute);margin-top:4px}
+.rh{border-color:var(--acc);background:linear-gradient(var(--acc2),var(--card) 60px)}
+.alerta{background:var(--warn2);border-radius:8px;padding:10px 12px;margin-top:10px;font-size:14px}
+.btn{background:var(--acc);color:#fff;border:0;border-radius:8px;padding:12px 22px;font:inherit;font-weight:600;cursor:pointer}.btn.sec{background:var(--acc2);color:var(--acc)}
+.msg{padding:10px;border-radius:7px;margin-top:10px;display:none}.ok{background:var(--acc2);color:var(--acc);display:block}.err{color:var(--warn);display:block}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:14px}.kpi{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px}.kpi b{font-size:26px;display:block}.kpi span{color:var(--mute);font-size:13px}.kpi.w b{color:var(--warn)}
+.bar{display:grid;grid-template-columns:160px 1fr 72px;gap:8px;align-items:center;margin:6px 0;font-size:14px}.bar i{display:block;height:14px;background:var(--acc);border-radius:3px}.bar em{white-space:nowrap;font-style:normal;color:var(--mute);text-align:right}.bar i.low{background:var(--warn)}
+table{width:100%;border-collapse:collapse;font-size:14px}th,td{text-align:left;padding:8px;border-bottom:1px solid var(--line)}th{color:var(--mute);font-weight:500}tr.r{cursor:pointer}tr.r:hover{background:var(--acc2)}.wrap{overflow-x:auto}
+.det{background:var(--acc2);font-size:13px}.det td{padding:12px}.tag{display:inline-block;background:var(--warn2);color:var(--warn);border-radius:10px;padding:0 8px;font-size:12px}
+.tip{border-left:3px solid var(--acc);padding:4px 12px;margin:10px 0}.tip b{display:block}ol li{margin:6px 0}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}.filters>*{flex:1;min-width:140px}
+.hide{display:none!important}
+@media(max-width:600px){.af{grid-template-columns:1fr}.bar{grid-template-columns:110px 1fr 34px}.esc button{width:100%}.esc{width:100%}.nps button{font-size:13px}}
+</style>
+</head><body>
+
+<header><button id="btnSair" class="hide" style="position:absolute;right:max(16px,calc((100% - 928px)/2));top:22px;z-index:2;background:rgba(255,255,255,.1);color:#fff;border:1px solid rgba(255,255,255,.25);border-radius:7px;padding:6px 12px;font:inherit;font-size:13px;cursor:pointer">Sair</button><img id="hlogo" alt="Sudati"><h1>Entrevista de Desligamento</h1><p>Recursos Humanos</p>
+<nav id="tabs"><button data-t="form" class="on">Entrevista</button><button data-t="dash">Indicadores</button><button data-t="hist">Histórico</button><button data-t="rel">Relatório do gestor</button><button data-t="guia">Roteiro</button></nav></header>
+<div class="card hide" id="restrito" style="max-width:560px;margin:40px auto;text-align:center;padding:36px 20px"><h2 style="font-size:20px">Acesso restrito ao RH</h2><p class="sub" style="font-size:14px;margin:8px 0 18px" id="loginTxt">Digite seu e-mail do RH. Você vai receber um link de acesso no Outlook.</p><div id="loginBox" style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center"><input id="loginEmail" type="email" placeholder="seu.email@sudati.com.br" style="flex:1;min-width:220px;max-width:320px"><button class="btn" id="btnLogin">Receber link de acesso</button></div></div>
+<main>
+<section id="form" class="on">
+<div class="seg hide" id="modo"><button data-m="rh" class="on">Conduzida pelo RH</button><button data-m="auto">Autopreenchimento</button></div>
+<p id="modoTxt" class="hide"></p>
+<div class="alerta hide" id="editBar" style="display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:14px"><span>Corrigindo a entrevista de <b id="editNome"></b></span><button class="btn sec" id="cancelEdit">Cancelar correção</button></div>
+
+<div class="card"><span class="step">1 de 5</span><h2>Sobre você</h2><p class="sub">Só o básico para organizarmos as informações.</p><div class="grid">
+<div><label class="f">Nome completo *</label><input id="nome"></div>
+<div><label class="f">Cargo *</label><input id="cargo"></div>
+<div><label class="f">Setor *</label><select id="setor"></select></div>
+<div><label class="f">Turno</label><select id="turno"><option></option><option>ADM</option><option>Turno I</option><option>Turno II</option><option>Turno III</option><option>Folguista</option><option>Ferista</option><option>4x4 Dia</option><option>4x4 Noite</option><option>12x36 Dia</option><option>12x36 Noite</option></select></div>
+<div><label class="f">Líder imediato</label><input id="lider"></div>
+<div><label class="f">Data de admissão</label><input type="date" id="adm"></div>
+<div><label class="f">Último dia *</label><input type="date" id="desl"></div>
+<div><label class="f">Tipo de desligamento *</label><select id="tipo"><option></option><option>Pedido de demissão</option><option>Dispensa sem justa causa</option><option>Término de contrato/experiência</option><option>Acordo (art. 484-A)</option><option>Aposentadoria</option></select></div>
+</div></div>
+
+<div class="card"><span class="step">2 de 5</span><h2>A decisão de sair</h2><p class="sub">Aqui não existe resposta certa. O que você contar ajuda quem continua aqui.</p>
+<div class="q"><div class="lbl">Quando você começou a pensar em sair?</div><div class="chips" data-one="quando"><button>Já nas primeiras semanas</button><button>Há poucos meses</button><button>Há mais de 6 meses</button><button>Foi algo recente, por um fato específico</button><button>Não pensei, a decisão foi da empresa</button></div></div>
+<div class="q"><div class="lbl">O que mais pesou? *</div><small>Marque até 3.</small><div class="chips" data-many="fatores" data-max="3"></div></div>
+<div class="q" id="pesoBox"><div class="lbl">Desses, qual foi o mais forte?</div><div class="chips" data-one="motivo" id="motivoChips"></div></div>
+<div class="q"><label>Teve algum momento ou acontecimento que fez você bater o martelo? Conte como foi.</label><textarea id="gatilho"></textarea></div>
+<div id="pedidoBox">
+<div class="q"><div class="lbl">Para onde você vai agora?</div><div class="chips" data-one="destino"><button>Outra indústria da região</button><button>Outro ramo / área</button><button>Negócio próprio</button><button>Estudar</button><button>Mudança de cidade</button><button>Ainda não sei</button></div></div>
+<div class="q"><div class="lbl">O que a nova oportunidade tem que aqui não tinha?</div><div class="chips" data-many="atrativo"><button>Salário maior</button><button>Turno / horário melhor</button><button>Mais perto de casa</button><button>Cargo maior</button><button>Benefícios</button><button>Trabalho menos pesado</button><button>Ambiente / liderança</button><button>Estabilidade</button></div></div>
+</div>
+<div class="q"><div class="lbl">Antes de decidir, você conversou com alguém aqui sobre o que te incomodava?</div><div class="chips" data-many="conversou"><button>Meu líder</button><button>RH</button><button>Colegas</button><button>Não conversei</button></div></div>
+<div class="q" id="ouvidoBox"><div class="lbl">Sentiu que foi ouvido(a) e que algo foi feito?</div><div class="chips" data-one="ouvido"><button>Sim</button><button>Ouviram, mas nada mudou</button><button>Não</button></div></div>
+</div>
+
+<div class="card"><span class="step">3 de 5</span><h2>Como foi trabalhar aqui</h2><p class="sub">Para cada frase, diga o quanto concorda.</p>
+<div class="legenda"><span>1 = discordo totalmente</span><span>5 = concordo totalmente</span></div>
+<div id="afs"></div></div>
+
+<div class="card"><span class="step">4 de 5</span><h2>Olhando para frente</h2>
+<div class="q"><div class="lbl">De 0 a 10, quanto você recomendaria a Sudati para um amigo ou parente trabalhar? *</div><div class="nps" id="nps"></div><div class="npsl"><span>Não recomendaria</span><span>Recomendaria muito</span></div></div>
+<div class="q"><label>O que teria feito você ficar?</label><small>Seja concreto: um valor, uma mudança, uma conversa...</small><textarea id="reter"></textarea></div>
+<div class="q"><label>Se você fosse gerente da sua área por um dia, qual a primeira coisa que mudaria?</label><textarea id="mudaria"></textarea></div>
+<div class="q"><label>Do que você vai sentir falta?</label><textarea id="falta"></textarea></div>
+<div class="q"><div class="lbl">Voltaria a trabalhar aqui no futuro?</div><div class="chips" data-one="volta"><button>Sim</button><button>Dependendo das condições</button><button>Não</button></div></div>
+<div class="q"><label>Tem algo que você prefere contar só para o RH, de forma reservada?</label><textarea id="reservado"></textarea>
+<label style="display:flex;gap:8px;align-items:flex-start;margin-top:8px;font-weight:400"><input type="checkbox" id="grave" style="width:auto;margin-top:4px"> O que relatei envolve assédio, discriminação, risco de segurança ou outra irregularidade.</label>
+<div class="alerta hide" id="graveTxt">Obrigado pela confiança. Esse relato será tratado com sigilo e encaminhado pelo RH ao canal adequado.</div></div>
+</div>
+
+<div class="card rh" id="rhBox"><span class="step">5 de 5 · uso interno do RH</span><h2>Avaliação do entrevistador</h2><p class="sub">Não aparece no autopreenchimento.</p><div class="grid">
+<div><label class="f">Entrevistador(a)</label><input id="entrevistador"></div>
+<div><label class="f">A saída era evitável?</label><select id="evitavel"><option></option><option>Sim, evitável</option><option>Parcialmente</option><option>Não, inevitável</option></select></div>
+<div><label class="f">Recontrataria?</label><select id="recontrata"><option></option><option>Sim</option><option>Com ressalvas</option><option>Não</option></select></div>
+<div><label class="f">Postura na conversa</label><select id="postura"><option></option><option>Aberto(a), falou com franqueza</option><option>Reservado(a)</option><option>Ressentido(a)</option></select></div>
+</div>
+<div class="q"><label>Percepção do RH: o motivo real é o mesmo que foi dito?</label><textarea id="percepcao"></textarea></div>
+<div class="q"><label>Ação recomendada (para a área, liderança ou processo)</label><textarea id="acao"></textarea></div>
+</div>
+
+<div class="card"><label style="display:flex;gap:8px;align-items:flex-start;font-weight:400"><input type="checkbox" id="lgpd" style="width:auto;margin-top:4px"> Estou ciente de que estas respostas serão usadas pelo RH para melhorias internas, tratadas com sigilo e sem impacto na minha rescisão ou referências. *</label></div>
+<button class="btn" id="salvar">Enviar entrevista</button> <button class="btn sec" id="limpar">Limpar</button>
+<div class="msg" id="msg"></div>
+</section>
+
+<div id="obrigado" class="card hide" style="text-align:center;padding:40px 18px"><h2 style="font-size:22px">Obrigado pela sua participação!</h2><p class="sub" style="font-size:15px;margin:10px 0 20px">Suas respostas foram enviadas ao RH com sigilo. Desejamos sucesso no seu próximo passo.</p><button class="btn sec" id="novaResp">Responder outra entrevista</button></div>
+
+<section id="dash">
+<div class="filters"><select id="fArea"></select><select id="fSet"></select><select id="fPer"><option value="0">Todo o período</option><option value="90">Últimos 90 dias</option><option value="180">Últimos 6 meses</option><option value="365" selected>Últimos 12 meses</option></select></div>
+<div class="kpis" id="kpis"></div>
+<div class="card"><h2>Evolução mês a mês</h2><p class="sub">Últimos 12 meses · barras = desligamentos entrevistados · número à direita = índice de recomendação do mês</p><div id="gMes"></div></div>
+<div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(300px,1fr))">
+<div class="card"><h2>O que mais pesou na saída</h2><p class="sub">Todos os fatores marcados</p><div id="gFat"></div></div>
+<div class="card"><h2>Pontos críticos por tema</h2><p class="sub">Média de 1 a 5 · em vermelho abaixo de 3</p><div id="gTem"></div></div>
+<div class="card"><h2>Quando começaram a pensar em sair</h2><div id="gQnd"></div></div>
+<div class="card"><h2>O que atraiu para fora</h2><p class="sub">Só pedidos de demissão</p><div id="gAtr"></div></div>
+<div class="card"><h2>Por área</h2><div id="gArea"></div></div>
+<div class="card"><h2>Por setor</h2><div id="gSet"></div></div>
+<div class="card"><h2>Tempo de casa na saída</h2><div id="gTmp"></div></div>
+</div>
+<div class="card wrap"><h2>Visão por líder</h2><p class="sub">Uso exclusivo do RH, nunca vai no relatório do gestor. Respeita os filtros acima. Médias abaixo de 3 em vermelho.</p>
+<table><thead><tr><th>Líder</th><th>Setor</th><th>Saídas</th><th>Pedidos</th><th>Média liderança</th><th>Índice recomendação</th><th>Evitáveis</th></tr></thead><tbody id="tLid"></tbody></table></div>
+</section>
+
+<section id="hist">
+<div class="filters"><input id="busca" placeholder="Buscar nome, cargo, setor, líder…"><select id="hTipo"></select><button class="btn sec" id="xls" style="flex:0 0 auto">Exportar para Excel</button></div>
+<div class="msg" id="xlsMsg"></div>
+<div class="card wrap"><table><thead><tr><th>Último dia</th><th>Nome</th><th>Setor</th><th>Tipo</th><th>Motivo mais forte</th><th>Nota</th></tr></thead><tbody id="tb"></tbody></table><p id="vazio" style="color:var(--mute)"></p></div>
+</section>
+
+<section id="rel">
+<div class="seg" id="rTipo"><button data-r="ind" class="on">Entrevista individual</button><button data-r="area">Indicadores da área</button></div>
+<div class="card"><h2 id="rTit"></h2><p class="sub" id="rSub"></p>
+<div id="rIndBox"><div class="grid"><div style="grid-column:1/-1"><label class="f">Entrevista *</label><select id="rEnt"></select></div></div></div>
+<div id="rAreaBox"><div class="grid">
+<div><label class="f">Nível</label><select id="rNivel"><option value="area">Área (macro)</option><option value="setor">Setor (micro)</option></select></div>
+<div><label class="f" id="rSetLbl">Área *</label><select id="rSet"></select></div>
+<div><label class="f">Período</label><select id="rPer"><option value="mes">Mês de referência</option><option value="90">Últimos 90 dias</option><option value="180">Últimos 6 meses</option><option value="365">Últimos 12 meses</option></select></div>
+<div id="rMesBox"><label class="f">Mês</label><input type="month" id="rMes"></div>
+</div>
+<div class="q"><label style="display:flex;gap:8px;font-weight:400"><input type="checkbox" id="rInd" style="width:auto"> Incluir também o resumo de cada entrevista do período</label>
+<label style="display:flex;gap:8px;font-weight:400"><input type="checkbox" id="rNom" checked style="width:auto"> Mostrar nomes dos colaboradores</label></div>
+<div id="rLista" class="q"></div></div>
+<div class="grid" style="margin-top:12px"><div><label class="f">Gestor(a) destinatário</label><input id="rGes"></div></div>
+<div class="q"><label style="display:flex;gap:8px;font-weight:400"><input type="checkbox" id="rAca" checked style="width:auto"> Incluir "ação recomendada" do RH</label></div>
+<div class="q"><label>Mensagem do RH para o gestor (opcional)</label><textarea id="rMsg" placeholder="Ex.: Vamos conversar sobre esses pontos na reunião do dia..."></textarea></div>
+<button class="btn" id="rBaixar">Baixar relatório</button> <button class="btn sec" id="rVer">Pré-visualizar</button>
+<div class="msg" id="rMsgBox"></div></div>
+<div class="card hide" id="rPrev" style="padding:0;overflow:hidden"><iframe id="rFrame" style="width:100%;height:700px;border:0;background:#fff"></iframe></div>
+</section>
+
+<section id="guia">
+<div class="card"><h2>Abertura</h2><p class="tip">"Obrigado por vir. Essa conversa é para a gente aprender com a sua experiência e melhorar para quem fica. Não muda nada na sua rescisão nem nas suas referências. Pode falar com toda a sinceridade."</p></div>
+<div class="card"><h2>Como aprofundar cada bloco</h2>
+<div class="tip"><b>A decisão</b>Se a resposta for "salário", pergunte: "Se o salário fosse igual, você ficaria?". Isso separa o motivo real do motivo socialmente aceito.</div>
+<div class="tip"><b>O gatilho</b>"O que aconteceu na semana em que você decidiu?" Pessoas raramente saem por um acúmulo abstrato; quase sempre há um fato.</div>
+<div class="tip"><b>Se não conversou com ninguém</b>"O que fez você não procurar seu líder ou o RH?" Essa resposta revela falhas de abertura e confiança.</div>
+<div class="tip"><b>Afirmações com nota baixa</b>Para qualquer nota 1 ou 2, peça um exemplo: "Pode me contar uma situação em que isso aconteceu?"</div>
+<div class="tip"><b>Retenção</b>"O que teria feito você ficar?" é a pergunta mais valiosa. Deixe o silêncio trabalhar antes de seguir.</div></div>
+<div class="card"><h2>Cuidados</h2><ol>
+<li>Escute mais do que fala. Não defenda a empresa nem a liderança.</li>
+<li>Não prometa mudanças e não tente reverter a decisão nesse momento.</li>
+<li>Registre as palavras do colaborador, não interpretações. Sua leitura vai no bloco do RH.</li>
+<li>Relato de assédio, discriminação ou risco de segurança: encaminhe no mesmo dia pelo canal adequado.</li>
+<li>Feche agradecendo e explicando os próximos passos da rescisão.</li></ol></div>
+<div class="card"><h2>Depois</h2><ol>
+<li>Salve no mesmo dia e, se quiser, gere o relatório individual para o gestor.</li>
+<li>No fim do mês, gere o relatório "Indicadores da área" para cada gestor.</li>
+<li>Olhe os Indicadores: temas abaixo de 3, saídas antes de 6 meses e a visão por líder são as prioridades.</li></ol></div>
+</section>
+</main>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script>
+const FAT=["Salário","Relação com o líder","Turno / jornada","Trabalho pesado ou repetitivo","Segurança / condições do posto","Falta de crescimento","Proposta de outra empresa","Clima com colegas","Benefícios","Distância / transporte","Falta de reconhecimento","Motivos pessoais / família","Saúde","Estudos","Decisão da empresa"];
+const AF=[["Chegada",[["int1","Quando entrei, recebi o treinamento que precisava para trabalhar com segurança."],["int2","O trabalho era como me explicaram na contratação."]]],
+["Liderança",[["lid1","Meu líder me tratava com respeito."],["lid2","Eu recebia retorno sobre meu trabalho, bom ou ruim."],["lid3","Eu podia falar de um problema sem medo."]]],
+["Dia a dia e segurança",[["seg1","Eu tinha EPIs, ferramentas e máquinas em boas condições."],["seg2","Eu me sentia seguro(a) no meu posto."],["seg3","A carga de trabalho era justa."]]],
+["Jornada",[["jor1","Eu estava satisfeito(a) com o turno em que trabalhava."],["jor2","Escalas e horas extras eram avisadas com antecedência."]]],
+["Reconhecimento",[["rec1","Meu salário era justo pelo que eu fazia."],["rec2","Os benefícios faziam diferença para mim."],["rec3","Eu enxergava chance de crescer aqui."]]],
+["Pertencimento",[["per1","Eu me dava bem com a equipe."],["per2","Eu tinha orgulho de dizer que trabalhava aqui."]]]];
+const MAPA={"Manutenção":["Lubrificação","Fábrica em Geral","Fabricação e Montagem (Oficina)","Manutenção Elétrica","Manutenção Mecânica","Planejamento e Controle de Manutenção (PCM)"],"Acabamento":["Acabamento BP","Plastificadora BP","Lixadeira/Embalagem"],"MDF":["Preparação de Fibras","Prensagem","Preparação de Cavaco"],"Logística e PCP":["Expedição","Movimentação Interna de Produtos"],"Pátio de Madeiras e Autos":["Pátio Madeiras","Autos"],"Qualidade e Processos":["Qualidade e Processos","Processos MDF"],"Florestal":["Florestal"],"Fiscal, Controladoria, Balança e Faturamento":["Balança","Faturamento","Fiscal/Controladoria"],"Suprimentos e TI":["Almoxarifado","TI"],"Meio Ambiente":["Meio Ambiente"],"Saúde e Segurança":["Saúde e Segurança","ADM de Obras Linha MDF 2 (Segurança)"],"Projetos":["ADM de Obras Linha MDF 2 (Projetos)"],"Vendas":["Vendas"],"Financeiro":["Financeiro"],"RH e Facilities":["Recursos Humanos","Facilities"],"Administrativo":["Administrativo"],"Diretoria":["Diretoria / Gerência"]};
+const AREA={};Object.entries(MAPA).forEach(([a,l])=>l.forEach(x=>AREA[x]=a));const areaDe=s=>AREA[s]||'A definir';
+const RHC=['entrevistador','evitavel','recontrata','postura','percepcao','acao'];
+const CAMPOS=['nome','cargo','setor','turno','lider','adm','desl','tipo','gatilho','reter','mudaria','falta','reservado',...RHC];
+const SEL=['quando','fatores','motivo','destino','atrativo','conversou','ouvido','volta','notas','nps'];
+let st={},modo='rh',dados=[],db=null,uid=null,admin=false,colab=true,aberto=null,editId=null,excl=new Set(),rTipo='ind',importando=new Set();
+const $=id=>document.getElementById(id),esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const dBR=s=>s?s.split('-').reverse().join('/'):'';
+$('setor').innerHTML='<option></option>'+Object.entries(MAPA).map(([a,l])=>`<optgroup label="${a}">${l.map(x=>`<option>${x}</option>`).join('')}</optgroup>`).join('');
+document.querySelector('[data-many="fatores"]').innerHTML=FAT.map(f=>`<button>${f}</button>`).join('');
+$('afs').innerHTML=AF.map(([t,l])=>`<div class="tema">${t}</div>`+l.map(([k,x])=>`<div class="af"><span>${x}</span><div class="esc" data-k="${k}">${[1,2,3,4,5].map(n=>`<button type="button" data-n="${n}">${n}</button>`).join('')}</div></div>`).join('')).join('');
+$('nps').innerHTML=[...Array(11).keys()].map(n=>`<button type="button" data-n="${n}">${n}</button>`).join('');
+
+/* ---------- formulário ---------- */
+function syncChips(){document.querySelectorAll('[data-one],[data-many]').forEach(g=>{const k=g.dataset.one||g.dataset.many,v=st[k];g.querySelectorAll('button').forEach(b=>b.classList.toggle('on',Array.isArray(v)?v.includes(b.textContent):v==b.textContent))});
+const f=st.fatores||[];$('motivoChips').innerHTML=f.map(x=>`<button>${esc(x)}</button>`).join('');$('pesoBox').classList.toggle('hide',f.length<2);if(f.length==1)st.motivo=f[0];if(st.motivo&&!f.includes(st.motivo))st.motivo='';$('motivoChips').querySelectorAll('button').forEach(b=>b.classList.toggle('on',b.textContent==st.motivo));
+const c=st.conversou||[];$('ouvidoBox').classList.toggle('hide',!c.length||c.includes('Não conversei'));
+document.querySelectorAll('.esc').forEach(g=>g.querySelectorAll('button').forEach(b=>b.classList.toggle('on',+b.dataset.n==(st.notas||{})[g.dataset.k])));
+$('nps').querySelectorAll('button').forEach(b=>b.classList.toggle('on',+b.dataset.n===st.nps))}
+$('form').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;const g=b.parentNode;
+if(g.dataset.one){st[g.dataset.one]=st[g.dataset.one]==b.textContent?'':b.textContent;syncChips()}
+else if(g.dataset.many){const k=g.dataset.many,a=st[k]||[],t=b.textContent,max=+g.dataset.max||99;
+if(t=='Não conversei')st[k]=a.includes(t)?[]:[t];else if(a.includes(t))st[k]=a.filter(x=>x!=t);else if(a.filter(x=>x!='Não conversei').length<max)st[k]=[...a.filter(x=>x!='Não conversei'),t];syncChips()}
+else if(g.classList.contains('esc')){st.notas={...(st.notas||{}),[g.dataset.k]:+b.dataset.n};syncChips()}
+else if(g.id=='nps'){st.nps=+b.dataset.n;syncChips()}});
+$('tipo').onchange=()=>$('pedidoBox').classList.toggle('hide',$('tipo').value!='Pedido de demissão');
+$('grave').onchange=()=>$('graveTxt').classList.toggle('hide',!$('grave').checked);
+function setModo(m){modo=m;document.querySelectorAll('#modo button').forEach(b=>b.classList.toggle('on',b.dataset.m==m));$('rhBox').classList.toggle('hide',m!='rh');$('modoTxt').textContent=m=='rh'?'O RH conduz a conversa e registra. Inclui o bloco de avaliação do entrevistador.':'O colaborador responde sozinho. O bloco interno do RH fica oculto.'}
+$('modo').onclick=e=>e.target.dataset.m&&setModo(e.target.dataset.m);
+function limpar(){CAMPOS.forEach(c=>$(c).value='');$('lgpd').checked=$('grave').checked=false;$('graveTxt').classList.add('hide');st={};editId=null;$('salvar').textContent='Enviar entrevista';$('editBar').classList.add('hide');syncChips();$('tipo').onchange()}
+$('limpar').onclick=limpar;$('cancelEdit').onclick=()=>{limpar();msg('')};
+function msg(t,ok){const m=$('msg');m.textContent=t;m.className='msg '+(t?(ok?'ok':'err'):'')}
+function carregar(r){limpar();CAMPOS.forEach(c=>$(c).value=r[c]||'');SEL.forEach(k=>{if(r[k]!=null)st[k]=JSON.parse(JSON.stringify(r[k]))});$('grave').checked=!!r.grave;$('graveTxt').classList.toggle('hide',!r.grave);$('lgpd').checked=true;setModo(r.modo=='auto'?'auto':'rh');editId=r.id;$('salvar').textContent='Salvar alterações';$('editBar').classList.remove('hide');$('editNome').textContent=r.nome;syncChips();$('tipo').onchange();tab('form');scrollTo(0,0)}
+$('salvar').onclick=async()=>{const r={...st};CAMPOS.forEach(c=>r[c]=$(c).value.trim());r.grave=$('grave').checked;
+if(!r.nome||!r.cargo||!r.setor||!r.desl||!r.tipo)return msg('Preencha os dados marcados com * no bloco 1.');
+if(!(r.fatores||[]).length)return msg('Marque ao menos um fator que pesou na saída.');
+if(r.nps==null)return msg('Responda a nota de 0 a 10.');if(!$('lgpd').checked)return msg('Confirme a ciência no final do formulário.');
+if(!r.motivo)r.motivo=r.fatores[0];if(r.tipo!='Pedido de demissão'){r.destino='';r.atrativo=[]}
+if(colab||modo=='auto')RHC.forEach(c=>r[c]='');
+r.modo=colab?'auto':modo;const old=editId&&dados.find(x=>x.id==editId);r.criadoEm=old?.criadoEm||new Date().toISOString();if(old)r.editadoEm=new Date().toISOString();
+const id=editId||'e'+Date.now().toString(36)+Math.random().toString(36).slice(2,6);const btn=$('salvar');btn.disabled=true;
+try{
+ if(colab){if(!db||!uid)throw new Error('Não foi possível conectar. Verifique se você está conectado(a) à sua conta.');
+  const ref=db.doc('respostas/'+uid),cur=await ref.get();await ref.set({...(cur.exists?cur.data():{}),[id]:r});
+  limpar();$('form').classList.add('hide');$('obrigado').classList.remove('hide');scrollTo(0,0)}
+ else{if(db)await db.collection('entrevistas').doc(id).set(r);else{dados=dados.filter(x=>x.id!=id);dados.push({id,...r});render()}
+  const ed=!!editId;limpar();scrollTo(0,0);msg(ed?'Alterações salvas.':db?'Entrevista salva.':'Salva só nesta sessão (banco indisponível).',true)}
+}catch(e){msg('Não foi possível salvar: '+(e.message||e.code||'erro'))}finally{btn.disabled=false}};
+$('novaResp').onclick=()=>{$('obrigado').classList.add('hide');$('form').classList.remove('hide');msg('')};
+
+/* ---------- navegação e modo colaborador ---------- */
+function tab(t){document.querySelectorAll('nav button').forEach(x=>x.classList.toggle('on',x.dataset.t==t));document.querySelectorAll('main>section').forEach(x=>x.classList.toggle('on',x.id==t));render()}
+$('tabs').onclick=e=>{const t=e.target.dataset.t;if(t)tab(t)};
+function aplicarPapel(){colab=!admin;document.querySelector('header nav').classList.toggle('hide',colab);document.querySelector('main').classList.toggle('hide',colab);$('restrito').classList.toggle('hide',!colab);if(!colab&&modo=='auto'&&!editId)setModo('rh')}
+
+
+/* ---------- utilitários de indicadores ---------- */
+const meses=r=>r.adm&&r.desl?(new Date(r.desl)-new Date(r.adm))/2629800000:null;
+const media=a=>a.length?a.reduce((x,y)=>x+y,0)/a.length:null;
+const indice=d=>{const np=d.filter(r=>r.nps!=null);return np.length?Math.round((np.filter(r=>r.nps>=9).length-np.filter(r=>r.nps<=6).length)/np.length*100):null};
+const fmtI=v=>v==null?'—':(v>0?'+':'')+v;
+const temaMedia=(d,l)=>media(d.flatMap(r=>l.map(([k])=>r.notas?.[k]).filter(Boolean)));
+function conta(arr,f){const c={};arr.forEach(r=>{[].concat(f(r)||[]).forEach(k=>{if(k)c[k]=(c[k]||0)+1})});return Object.entries(c).sort((a,b)=>b[1]-a[1])}
+function bars(el,pares,fmt,low){const max=low?5:Math.max(1,...pares.map(p=>p[1]));$(el).innerHTML=pares.length?pares.map(([l,v,x])=>`<div class="bar"><span>${esc(l)}</span><i class="${low&&v<3?'low':''}" style="width:${v/max*100}%"></i><em>${fmt?fmt(v,x):v}</em></div>`).join(''):'<p style="color:var(--mute)">Sem dados ainda.</p>'}
+const MES=['jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov','dez'];
+function ult12(){const o=[],n=new Date();for(let i=11;i>=0;i--){const d=new Date(n.getFullYear(),n.getMonth()-i,1);o.push(d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0'))}return o}
+const mesLbl=k=>MES[+k.slice(5)-1]+'/'+k.slice(2,4);
+function opts(el,vals,todos,fmt){const cur=$(el).value;$(el).innerHTML=(todos?`<option value="">${todos}</option>`:'')+vals.map(v=>`<option value="${esc(v)}" ${v==cur?'selected':''}>${esc(fmt?fmt(v):v)}</option>`).join('')}
+
+/* ---------- indicadores ---------- */
+function renderDash(){
+opts('fArea',[...new Set(dados.map(r=>areaDe(r.setor)))].sort(),'Todas as áreas');const fa=$('fArea').value;
+opts('fSet',[...new Set(dados.filter(r=>!fa||areaDe(r.setor)==fa).map(r=>r.setor))].sort(),'Todos os setores');const fs=$('fSet').value;
+const base=dados.filter(r=>(!fa||areaDe(r.setor)==fa)&&(!fs||r.setor==fs));
+const dias=+$('fPer').value,lim=Date.now()-dias*864e5,d=base.filter(r=>!dias||new Date(r.desl)>=lim);
+const n=d.length,tm=d.map(meses).filter(x=>x!=null),ev=d.filter(r=>r.evitavel),evS=ev.filter(r=>r.evitavel!='Não, inevitável').length,gr=d.filter(r=>r.grave).length;
+$('kpis').innerHTML=[[n,'entrevistas'],[fmtI(indice(d)),'índice de recomendação (−100 a +100)'],[ev.length?Math.round(evS/ev.length*100)+'%':'—','saídas evitáveis (total ou parcial)'],[tm.length?Math.round(tm.filter(x=>x<6).length/tm.length*100)+'%':'—','saíram antes de 6 meses'],[gr,'relatos sensíveis',gr?'w':'']].map(([v,l,c])=>`<div class="kpi ${c||''}"><b>${v}</b><span>${l}</span></div>`).join('');
+bars('gMes',ult12().map(k=>{const m=base.filter(r=>(r.desl||'').startsWith(k));return[mesLbl(k),m.length,indice(m)]}),(v,x)=>v?`${v} · ${fmtI(x)}`:'0');
+bars('gFat',conta(d,r=>r.fatores).slice(0,8));
+bars('gTem',AF.map(([t,l])=>[t,temaMedia(d,l)]).filter(p=>p[1]).sort((a,b)=>a[1]-b[1]),v=>v.toFixed(1),1);
+const oq=["Já nas primeiras semanas","Há poucos meses","Há mais de 6 meses","Foi algo recente, por um fato específico"],cq=conta(d,r=>r.quando);bars('gQnd',oq.map(o=>[o,(cq.find(c=>c[0]==o)||[0,0])[1]]).filter(p=>p[1]));
+bars('gAtr',conta(d,r=>r.atrativo));bars('gSet',conta(d,r=>r.setor));bars('gArea',conta(d,r=>areaDe(r.setor)));
+const fx=m=>m<3?'Até 3 meses':m<6?'3 a 6 meses':m<12?'6 a 12 meses':m<36?'1 a 3 anos':'Mais de 3 anos',ft=conta(d.filter(r=>meses(r)!=null),r=>fx(meses(r)));bars('gTmp',['Até 3 meses','3 a 6 meses','6 a 12 meses','1 a 3 anos','Mais de 3 anos'].map(o=>[o,(ft.find(f=>f[0]==o)||[0,0])[1]]).filter(p=>p[1]));
+const L={};d.forEach(r=>{const k=(r.lider||'').trim();if(!k)return;const key=k.toLowerCase();(L[key]=L[key]||{nome:k,rs:[]}).rs.push(r)});
+const lid=AF.find(a=>a[0]=='Liderança')[1],rows=Object.values(L).map(o=>{const rs=o.rs,ml=temaMedia(rs,lid),e=rs.filter(r=>r.evitavel),es=e.filter(r=>r.evitavel!='Não, inevitável').length;return{...o,ml,n:rs.length,ped:rs.filter(r=>r.tipo=='Pedido de demissão').length,idx:indice(rs),ev:e.length?es+' de '+e.length:'—',set:[...new Set(rs.map(r=>r.setor))].join(', ')}}).sort((a,b)=>b.n-a.n||(a.ml??9)-(b.ml??9));
+$('tLid').innerHTML=rows.length?rows.map(o=>`<tr><td>${esc(o.nome)}</td><td>${esc(o.set)}</td><td>${o.n}</td><td>${o.ped}</td><td style="${o.ml!=null&&o.ml<3?'color:var(--warn);font-weight:600':''}">${o.ml==null?'—':o.ml.toFixed(1)}</td><td>${fmtI(o.idx)}</td><td>${o.ev}</td></tr>`).join(''):'<tr><td colspan="7" style="color:var(--mute)">Nenhuma entrevista com líder informado.</td></tr>'}
+
+/* ---------- histórico ---------- */
+function linhas(r){const l=(t,v)=>(Array.isArray(v)?v.length:v)?`<p><b>${t}:</b> ${esc(Array.isArray(v)?v.join(', '):v)}</p>`:'';
+const notas=AF.flatMap(([,x])=>x).filter(([k])=>r.notas?.[k]).map(([k,t])=>`${esc(t)} <b>${r.notas[k]}</b>`).join('<br>');return{l,notas}}
+function det(r){const{l,notas}=linhas(r);return`<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px"><button class="btn sec" data-ed="${r.id}">Corrigir</button><button class="btn sec" data-rl="${r.id}">Relatório para o gestor</button><button class="btn sec" data-del="${r.id}" style="color:var(--warn)">Excluir</button></div>`+l('Área',areaDe(r.setor))+l('Cargo',r.cargo)+l('Turno',r.turno)+l('Líder',r.lider)+l('Admissão',dBR(r.adm))+l('Começou a pensar em sair',r.quando)+l('Fatores',r.fatores)+l('Gatilho',r.gatilho)+l('Destino',r.destino)+l('O que atraiu',r.atrativo)+l('Conversou com',r.conversou)+l('Foi ouvido',r.ouvido)+(notas?`<p><b>Afirmações (1 a 5):</b><br>${notas}</p>`:'')+l('O que faria ficar',r.reter)+l('Mudaria como gerente',r.mudaria)+l('Vai sentir falta',r.falta)+l('Voltaria',r.volta)+l('Relato reservado',r.reservado)+l('Entrevistador',r.entrevistador)+l('Evitável',r.evitavel)+l('Recontrataria',r.recontrata)+l('Postura',r.postura)+l('Percepção do RH',r.percepcao)+l('Ação recomendada',r.acao)+(r.editadoEm?`<p class="sub">Corrigida em ${new Date(r.editadoEm).toLocaleString('pt-BR')}</p>`:'')}
+function renderHist(){opts('hTipo',[...new Set(dados.map(r=>r.tipo))],'Todos os tipos');const ht=$('hTipo').value,q=$('busca').value.toLowerCase();
+const h=dados.filter(r=>(!ht||r.tipo==ht)&&(!q||[r.nome,r.cargo,r.setor,areaDe(r.setor),r.motivo,r.lider].join(' ').toLowerCase().includes(q))).sort((a,b)=>(b.desl||'').localeCompare(a.desl||''));
+$('vazio').textContent=h.length?'':'Nenhuma entrevista registrada ainda.';
+$('tb').innerHTML=h.map(r=>`<tr class="r" data-id="${r.id}"><td>${esc(dBR(r.desl))}</td><td>${esc(r.nome)} ${r.grave?'<span class="tag">sensível</span>':''}${r.modo=='auto'?' <span class="sub">(auto)</span>':''}</td><td>${esc(r.setor)}<br><small style="color:var(--mute)">${esc(areaDe(r.setor))}</small></td><td>${esc(r.tipo)}</td><td>${esc(r.motivo)}</td><td>${r.nps??'—'}</td></tr>`+(aberto==r.id?`<tr class="det"><td colspan="6">${det(r)}</td></tr>`:'')).join('')}
+$('tb').onclick=async e=>{const b=e.target.closest('button');
+if(b){const r=dados.find(x=>x.id==(b.dataset.ed||b.dataset.del||b.dataset.rl));if(!r)return;
+ if(b.dataset.ed)carregar(r);
+ else if(b.dataset.rl){setRTipo('ind');tab('rel');$('rEnt').value=r.id;rRender()}
+ else if(confirm(`Excluir definitivamente a entrevista de ${r.nome}? Não dá para desfazer.`)){try{if(db)await db.collection('entrevistas').doc(r.id).delete();else{dados=dados.filter(x=>x.id!=r.id);render()}aberto=null}catch(err){alert('Não foi possível excluir: '+(err.message||err.code))}}
+ return}
+const t=e.target.closest('tr.r');if(!t)return;aberto=aberto==t.dataset.id?null:t.dataset.id;renderHist()};
+
+/* ---------- excel ---------- */
+async function salvarArquivo(nome,data,tipo,box){const m=$(box),a=document.createElement('a');a.href=URL.createObjectURL(new Blob([data],{type:tipo}));a.download=nome;document.body.appendChild(a);a.click();a.remove();m.textContent='Arquivo baixado.';m.className='msg ok'}
+$('xls').onclick=async()=>{if(!window.XLSX){$('xlsMsg').textContent='Não foi possível carregar o gerador de Excel. Tente recarregar a página.';$('xlsMsg').className='msg err';return}
+const j=a=>Array.isArray(a)?a.join('; '):(a??'');const afs=AF.flatMap(([t,l])=>l.map(([k,x])=>[k,t+' · '+x]));
+const rows=[...dados].sort((a,b)=>(a.desl||'').localeCompare(b.desl||'')).map(r=>{const m=meses(r);const o={'Último dia':dBR(r.desl),'Mês':r.desl?.slice(0,7)||'','Nome':r.nome,'Cargo':r.cargo,'Área':areaDe(r.setor),'Setor':r.setor,'Turno':r.turno,'Líder':r.lider,'Admissão':dBR(r.adm),'Tempo de casa (meses)':m==null?'':Math.round(m*10)/10,'Tipo':r.tipo,'Modo':r.modo=='auto'?'Autopreenchimento':'RH','Quando pensou em sair':r.quando,'Fatores':j(r.fatores),'Motivo mais forte':r.motivo,'Gatilho':r.gatilho,'Destino':r.destino,'O que atraiu':j(r.atrativo),'Conversou com':j(r.conversou),'Foi ouvido':r.ouvido};
+afs.forEach(([k,t])=>o[t]=r.notas?.[k]??'');AF.forEach(([t,l])=>{const v=temaMedia([r],l);o['Média · '+t]=v==null?'':Math.round(v*10)/10});
+Object.assign(o,{'Nota recomendação (0-10)':r.nps??'','O que faria ficar':r.reter,'Mudaria como gerente':r.mudaria,'Vai sentir falta':r.falta,'Voltaria':r.volta,'Relato reservado':r.reservado,'Caso sensível':r.grave?'Sim':'','Entrevistador':r.entrevistador,'Evitável':r.evitavel,'Recontrataria':r.recontrata,'Postura':r.postura,'Percepção do RH':r.percepcao,'Ação recomendada':r.acao});return o});
+const wb=XLSX.utils.book_new(),ws=XLSX.utils.json_to_sheet(rows.length?rows:[{'Sem dados':''}]);ws['!cols']=Object.keys(rows[0]||{a:1}).map(()=>({wch:22}));XLSX.utils.book_append_sheet(wb,ws,'Entrevistas');
+await salvarArquivo(`entrevistas-desligamento-${new Date().toISOString().slice(0,10)}.xlsx`,XLSX.write(wb,{bookType:'xlsx',type:'array'}),'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet','xlsMsg')};
+
+/* ---------- relatório do gestor ---------- */
+function setRTipo(t){rTipo=t;document.querySelectorAll('#rTipo button').forEach(b=>b.classList.toggle('on',b.dataset.r==t));$('rIndBox').classList.toggle('hide',t!='ind');$('rAreaBox').classList.toggle('hide',t=='ind');
+$('rTit').textContent=t=='ind'?'Enviar a entrevista de um colaborador':'Enviar os indicadores da área';
+$('rSub').textContent=(t=='ind'?'Gera um relatório com as respostas de uma pessoa, para o gestor dela. ':'Gera o fechamento do período para o gestor, só com a área ou setor escolhido. ')+'Nunca inclui relato reservado, alerta de caso sensível nem a avaliação interna do RH (evitável, recontrataria, postura, percepção).';$('rPrev').classList.add('hide');rRender()}
+$('rTipo').onclick=e=>e.target.dataset.r&&setRTipo(e.target.dataset.r);
+if(!$('rMes').value){const n=new Date();$('rMes').value=n.getFullYear()+'-'+String(n.getMonth()+1).padStart(2,'0')}
+function relDados(){const nv=$('rNivel').value,s=$('rSet').value,p=$('rPer').value,mes=$('rMes').value,lim=Date.now()-(+p)*864e5;
+return dados.filter(r=>(nv=='area'?areaDe(r.setor):r.setor)==s&&(p=='mes'?(r.desl||'').startsWith(mes):new Date(r.desl)>=lim)).sort((a,b)=>(b.desl||'').localeCompare(a.desl||''))}
+function rRender(){const ord=[...dados].sort((a,b)=>(b.desl||'').localeCompare(a.desl||''));opts('rEnt',ord.map(r=>r.id),'',id=>{const r=dados.find(x=>x.id==id);return`${dBR(r.desl)} · ${r.nome} · ${r.setor}`});if(!ord.length)$('rEnt').innerHTML='<option value="">Nenhuma entrevista ainda</option>';
+const nv=$('rNivel').value;$('rSetLbl').textContent=nv=='area'?'Área *':'Setor *';$('rMesBox').classList.toggle('hide',$('rPer').value!='mes');
+const vs=nv=='area'?Object.keys(MAPA):Object.values(MAPA).flat();opts('rSet',vs);
+const d=relDados();$('rLista').innerHTML=!$('rInd').checked?'':d.length?`<div class="lbl">Entrevistas incluídas (${d.filter(r=>!excl.has(r.id)).length} de ${d.length})</div>`+d.map(r=>`<label style="display:flex;gap:8px;font-weight:400"><input type="checkbox" data-rid="${r.id}" ${excl.has(r.id)?'':'checked'} style="width:auto"> ${esc(dBR(r.desl))} · ${esc(r.nome)} · ${esc(r.cargo)}</label>`).join(''):'<p style="color:var(--mute)">Nenhuma entrevista neste período.</p>'}
+$('rLista').onchange=e=>{const id=e.target.dataset.rid;if(!id)return;e.target.checked?excl.delete(id):excl.add(id);rRender()};
+['rNivel','rSet','rPer','rMes','rInd'].forEach(i=>$(i).addEventListener('change',rRender));
+const LOGO="data:image/png;base64,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";
+const CSS=`
+@page{size:A4;margin:0}
+*{box-sizing:border-box;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+body{margin:0;background:#eceae5;font:13px/1.55 "Segoe UI",system-ui,-apple-system,sans-serif;color:#1f2623}
+.pg{max-width:210mm;margin:24px auto;background:#fff;box-shadow:0 2px 18px rgba(0,0,0,.08)}
+.dica{max-width:210mm;margin:16px auto 0;font-size:12px;color:#5f6863;text-align:center}
+.top{background:#17232a;color:#fff;padding:30px 40px 26px;position:relative;overflow:hidden}
+.top:after{content:"";position:absolute;right:-60px;top:-60px;width:220px;height:220px;border-radius:50%;background:rgba(255,255,255,.06)}
+.logo{height:30px;display:block;margin-bottom:14px}.brand{font-size:11px;letter-spacing:.18em;text-transform:uppercase;opacity:.75;font-weight:600}
+.top h1{font-size:25px;line-height:1.2;margin:10px 0 6px;font-weight:700;letter-spacing:-.01em}
+.top .sub{font-size:13.5px;opacity:.85}
+.meta{display:flex;flex-wrap:wrap;gap:6px 22px;margin-top:18px;font-size:12px;opacity:.9}
+.meta b{display:block;font-size:10px;letter-spacing:.12em;text-transform:uppercase;opacity:.65;font-weight:600}
+.conf{background:#f7efe9;color:#8e3f24;font-size:11px;padding:7px 40px;letter-spacing:.02em}
+.body{padding:26px 40px 34px}
+.msg{border-left:3px solid #1f4d38;background:#f3f6f4;padding:12px 16px;border-radius:0 6px 6px 0;margin-bottom:22px;font-size:13px}
+.msg b{display:block;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#1f4d38;margin-bottom:3px}
+.kp{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:8px}
+.kp div{border:1px solid #e4e2dc;border-radius:10px;padding:14px 14px 12px}
+.kp b{display:block;font-size:26px;line-height:1.1;font-weight:700;color:#1f4d38;letter-spacing:-.02em}
+.kp b.neg{color:#b04a2b}
+.kp span{display:block;font-size:11px;color:#69726d;margin-top:4px;line-height:1.35}
+section{margin-top:26px;page-break-inside:avoid}
+h2{font-size:15px;margin:0 0 3px;font-weight:700;display:flex;align-items:center;gap:10px}
+h2 i{font-style:normal;font-size:10px;font-weight:700;color:#fff;background:#1f4d38;border-radius:4px;padding:2px 6px;letter-spacing:.05em}
+.h2s{font-size:11.5px;color:#7a837e;margin:0 0 12px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:26px}
+.b{display:grid;grid-template-columns:minmax(120px,42%) 1fr 54px;gap:10px;align-items:center;margin:7px 0;font-size:12.5px}
+.b .t{height:9px;background:#eef0ee;border-radius:5px;overflow:hidden}.b .t i{display:block;height:100%;border-radius:5px;background:#3d7d5e}
+.b .t i.low{background:#c45a3a}.b em{font-style:normal;text-align:right;font-weight:600;color:#3a423e;font-variant-numeric:tabular-nums}
+.b em.low{color:#b04a2b}
+.cols{display:flex;align-items:flex-end;gap:6px;height:120px;border-bottom:1px solid #e4e2dc;padding:0 2px}
+.cols div{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;font-size:10.5px;color:#5f6863}
+.cols i{display:block;width:100%;max-width:30px;background:#3d7d5e;border-radius:4px 4px 0 0;min-height:2px}
+.cols i.cur{background:#1f4d38}.cols b{font-size:11px;color:#1f2623;margin-bottom:3px}
+.lbls{display:flex;gap:6px;padding:5px 2px 0}.lbls span{flex:1;text-align:center;font-size:10px;color:#7a837e}
+.lbls.idx span{color:#1f4d38;font-weight:600}
+.m{color:#7a837e}.c{display:grid;grid-template-columns:minmax(120px,38%) 1fr 92px;gap:10px;align-items:center;margin:8px 0;font-size:12.5px}.c .t{height:9px;background:#eef0ee;border-radius:5px;position:relative}.c .t i{display:block;height:100%;border-radius:5px;background:#3d7d5e}.c .t i.low{background:#c45a3a}.c .t s{position:absolute;top:-4px;width:2px;height:17px;background:#17232a;border-radius:1px}.c em{font-style:normal;text-align:right;font-variant-numeric:tabular-nums;line-height:1.25}.c em b{font-size:13px}.c em b.low{color:#b04a2b}.c em small{display:block;font-size:10.5px;color:#7a837e}.leg{font-size:11px;color:#7a837e;margin:0 0 10px;display:flex;gap:16px;align-items:center}.leg i{display:inline-block;width:14px;height:8px;border-radius:4px;background:#3d7d5e;margin-right:5px}.leg s{display:inline-block;width:2px;height:12px;background:#17232a;margin-right:5px;vertical-align:middle}.kp small{display:block;font-size:10.5px;color:#7a837e;margin-top:6px;border-top:1px solid #f0efeb;padding-top:5px}
+.ent{border:1px solid #e4e2dc;border-radius:12px;margin-top:14px;overflow:hidden;page-break-inside:avoid}
+.ent .hd{background:#f6f7f5;padding:14px 18px;border-bottom:1px solid #e4e2dc;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.ent .hd h3{margin:0;font-size:15px}.ent .hd p{margin:2px 0 0;font-size:12px;color:#69726d}
+.nps{text-align:center;min-width:64px}.nps b{display:block;font-size:22px;line-height:1;color:#1f4d38}.nps b.neg{color:#b04a2b}.nps span{font-size:10px;color:#7a837e}
+.ent .bd{padding:6px 18px 14px}
+.qa{display:grid;grid-template-columns:170px 1fr;gap:10px;padding:8px 0;border-bottom:1px solid #f0efeb;font-size:12.5px}
+.qa:last-child{border:0}.qa dt{color:#69726d;font-size:11.5px}.qa dd{margin:0}
+.tags span{display:inline-block;background:#eef3f0;color:#1f4d38;border-radius:20px;padding:1px 9px;margin:0 4px 4px 0;font-size:11.5px}
+.tags span.main{background:#1f4d38;color:#fff}
+.nt{display:grid;grid-template-columns:1fr auto;gap:4px 14px;font-size:12px}.nt .d{display:flex;gap:3px}.nt .d i{width:9px;height:9px;border-radius:50%;background:#e4e2dc}.nt .d i.on{background:#3d7d5e}.nt .d.low i.on{background:#c45a3a}
+.quote{font-style:italic;color:#2c3430}
+.acao{background:#f3f6f4;border-radius:8px;padding:10px 12px;margin-top:10px;font-size:12.5px}.acao b{color:#1f4d38}
+ul.ac{margin:0;padding-left:18px}ul.ac li{margin:4px 0}
+.ft{border-top:1px solid #e4e2dc;margin:0 40px;padding:12px 0 20px;font-size:10.5px;color:#9aa19d;display:flex;justify-content:space-between}
+@media print{body{background:#fff}.pg{margin:0;box-shadow:none;max-width:none}.dica{display:none}}
+@media(max-width:640px){.top,.body{padding-left:18px;padding-right:18px}.conf{padding:7px 18px}.ft{margin:0 18px}.kp{grid-template-columns:1fr 1fr}.two{grid-template-columns:1fr}.qa{grid-template-columns:1fr;gap:2px}}`;
+function bar(pares,fmt,low){const max=low?5:Math.max(1,...pares.map(p=>p[1]));return pares.length?pares.map(([l,v,x])=>{const lo=low&&v<3;return`<div class="b"><span>${esc(l)}</span><div class="t"><i class="${lo?'low':''}" style="width:${Math.max(2,v/max*100)}%"></i></div><em class="${lo?'low':''}">${fmt?fmt(v,x):v}</em></div>`}).join(''):'<p class="m">Sem dados no período.</p>'}
+const f1=v=>v==null?'—':v.toFixed(1).replace('.',',');
+function cmp(pares){return pares.length?`<div class="leg"><span><i></i>${$('rNivel').value=='area'?'Esta área':'Este setor'}</span><span><s></s>Média Sudati</span></div>`+pares.map(([l,v,ref])=>{const lo=v<3;return`<div class="c"><span>${esc(l)}</span><div class="t"><i class="${lo?'low':''}" style="width:${v/5*100}%"></i>${ref!=null?`<s style="left:calc(${ref/5*100}% - 1px)"></s>`:''}</div><em><b class="${lo?'low':''}">${f1(v)}</b><small>Sudati ${f1(ref)}</small></em></div>`}).join(''):'<p class="m">Sem dados no período.</p>'}
+function colunas(evo,cur){const max=Math.max(1,...evo.map(e=>e[1]));return`<div class="cols">${evo.map(([l,v],i)=>`<div><b>${v||''}</b><i class="${i==cur?'cur':''}" style="height:${v?v/max*85:0}%"></i></div>`).join('')}</div><div class="lbls">${evo.map(e=>`<span>${e[0]}</span>`).join('')}</div><div class="lbls idx">${evo.map(e=>`<span>${e[1]?fmtI(e[2]):'·'}</span>`).join('')}</div><p class="h2s" style="margin-top:6px">Barras: desligamentos entrevistados · números em verde: índice de recomendação do mês</p>`}
+function blocoEnt(r,titulo,aca){const m=meses(r),q=(t,v)=>v?`<div class="qa"><dt>${t}</dt><dd>${v}</dd></div>`:'',tx=v=>v?`<span class="quote">“${esc(v)}”</span>`:'',tg=(a,main)=>a&&a.length?`<div class="tags">${a.map(x=>`<span class="${x==main?'main':''}">${esc(x)}</span>`).join('')}</div>`:'';
+const nt=AF.flatMap(([,x])=>x).filter(([k])=>r.notas?.[k]).map(([k,t])=>{const n=r.notas[k];return`<span>${esc(t)}</span><span class="d ${n<3?'low':''}">${[1,2,3,4,5].map(i=>`<i class="${i<=n?'on':''}"></i>`).join('')}</span>`}).join('');
+return`<div class="ent"><div class="hd"><div><h3>${titulo}</h3><p>${esc(r.setor)} · ${esc(r.tipo)} · último dia ${esc(dBR(r.desl))}${m!=null?' · '+(m<12?Math.max(1,Math.round(m))+' meses':(m/12).toFixed(1).replace('.',',')+' anos')+' de casa':''}${r.turno?' · '+esc(r.turno):''}</p></div>${r.nps!=null?`<div class="nps"><b class="${r.nps<=6?'neg':''}">${r.nps}</b><span>recomendação<br>(0 a 10)</span></div>`:''}</div><div class="bd">`+
+q('O que mais pesou',tg(r.fatores,r.motivo))+q('Começou a pensar em sair',esc(r.quando))+q('O momento da decisão',tx(r.gatilho))+q('O que a nova vaga oferece',tg(r.atrativo))+q('Conversou antes com',esc((r.conversou||[]).join(', '))+(r.ouvido?` · ${esc(r.ouvido)}`:''))+
+(nt?q('Avaliação (1 a 5)',`<div class="nt">${nt}</div>`):'')+q('O que teria feito ficar',tx(r.reter))+q('Mudaria como gerente',tx(r.mudaria))+q('Vai sentir falta',tx(r.falta))+q('Voltaria a trabalhar aqui',esc(r.volta))+
+(aca&&r.acao?`<div class="acao"><b>Ação recomendada pelo RH:</b> ${esc(r.acao)}</div>`:'')+'</div></div>'}
+function relHTML(){const hoje=new Date().toLocaleDateString('pt-BR'),ges=$('rGes').value.trim(),aca=$('rAca').checked,mm=$('rMsg').value.trim();
+const doc=(t,sub,meta,corpo)=>`<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${esc(t)}</title><style>${CSS}</style></head><body><div class="dica">Para salvar em PDF: Ctrl+P → destino "Salvar como PDF" → em Mais definições, marque "Gráficos de plano de fundo".</div><div class="pg"><div class="top"><img class="logo" src="${LOGO}" alt="Sudati"><div class="brand">Recursos Humanos · Entrevista de desligamento</div><h1>${esc(t)}</h1><div class="sub">${sub}</div><div class="meta">${meta.concat(ges?[['Para',esc(ges)]]:[]).concat([['Emitido em',hoje]]).map(([a,b])=>`<div><b>${a}</b>${b}</div>`).join('')}</div></div><div class="conf">Documento confidencial · uso exclusivo da gestão da área · não compartilhar nem encaminhar</div><div class="body">${mm?`<div class="msg"><b>Mensagem do RH</b>${esc(mm).replace(/\n/g,'<br>')}</div>`:''}${corpo}</div><div class="ft"><span>Entrevista de desligamento · Sudati</span><span>Gerado pelo RH</span></div></div></body></html>`;
+if(rTipo=='ind'){const r=dados.find(x=>x.id==$('rEnt').value);if(!r)return null;return{nome:'entrevista-'+r.nome,html:doc('Entrevista de desligamento',esc(r.nome)+' · '+esc(r.cargo),[['Área',esc(areaDe(r.setor))],['Setor',esc(r.setor)],['Último dia',dBR(r.desl)]],blocoEnt(r,esc(r.nome),aca))}}
+const d=relDados().filter(r=>!excl.has(r.id)),set=$('rSet').value,nv=$('rNivel').value,p=$('rPer').value,per=p=='mes'?(()=>{const k=$('rMes').value;return ['janeiro','fevereiro','março','abril','maio','junho','julho','agosto','setembro','outubro','novembro','dezembro'][+k.slice(5)-1]+' de '+k.slice(0,4)})():$('rPer').selectedOptions[0].text.toLowerCase();
+const n=d.length,tm=d.map(meses).filter(x=>x!=null),ped=d.filter(r=>r.tipo=='Pedido de demissão').length,idx=indice(d);
+const lim=Date.now()-(+p)*864e5,E=dados.filter(r=>p=='mes'?(r.desl||'').startsWith($('rMes').value):new Date(r.desl)>=lim),eTm=E.map(meses).filter(x=>x!=null),eP=E.filter(r=>r.tipo=='Pedido de demissão').length;
+const temas=AF.map(([t,l])=>[t,temaMedia(d,l),temaMedia(E,l)]).filter(p=>p[1]).sort((a,b)=>a[1]-b[1]);
+const frases=AF.flatMap(([,l])=>l).map(([k,t])=>[t,media(d.map(r=>r.notas?.[k]).filter(Boolean)),media(E.map(r=>r.notas?.[k]).filter(Boolean))]).filter(p=>p[1]).sort((a,b)=>a[1]-b[1]).slice(0,4);
+const base=dados.filter(r=>(nv=='area'?areaDe(r.setor):r.setor)==set),ks=ult12().slice(p=='mes'?-6:-12);
+const evo=ks.map(k=>{const m=base.filter(r=>(r.desl||'').startsWith(k));return[mesLbl(k),m.length,indice(m)]}),cur=p=='mes'?ks.indexOf($('rMes').value):-1;
+const nom=$('rNom').checked,acoes=d.filter(r=>r.acao);let s=0;const sec=(t,sub,c)=>`<section><h2><i>${String(++s).padStart(2,'0')}</i>${t}</h2>${sub?`<p class="h2s">${sub}</p>`:''}${c}</section>`;
+const corpo=`<div class="kp"><div><b>${n}</b><span>desligamentos entrevistados</span><small>Sudati: ${E.length}</small></div><div><b>${n?Math.round(ped/n*100)+'%':'—'}</b><span>foram pedidos de demissão</span><small>Sudati: ${E.length?Math.round(eP/E.length*100)+'%':'—'}</small></div><div><b>${tm.length?media(tm).toFixed(1).replace('.',',')+' m':'—'}</b><span>tempo médio de casa</span><small>Sudati: ${eTm.length?media(eTm).toFixed(1).replace('.',',')+' m':'—'}</small></div><div><b class="${idx!=null&&idx<0?'neg':''}">${fmtI(idx)}</b><span>índice de recomendação<br>(−100 a +100)</span><small>Sudati: ${fmtI(indice(E))}</small></div></div>`+
+sec('Evolução mês a mês','',colunas(evo,cur))+
+`<div class="two">`+sec('O que mais pesou na saída','Fatores marcados pelos colaboradores',bar(conta(d,r=>r.fatores).slice(0,6)))+sec('Avaliação por tema','Média de 1 a 5 · em vermelho, abaixo de 3',cmp(temas))+`</div>`+
+(nv=='area'&&n?sec('Por setor','',bar(conta(d,r=>r.setor))):'')+
+(frases.length?sec('Pontos de atenção','As frases com pior avaliação no período',cmp(frases)):'')+
+(aca&&acoes.length&&!$('rInd').checked?sec('Ações recomendadas pelo RH','',`<ul class="ac">${acoes.map(r=>`<li>${esc(r.acao)}</li>`).join('')}</ul>`):'')+
+($('rInd').checked&&n?sec('Entrevistas do período','',d.map((r,i)=>blocoEnt(r,nom?esc(r.nome)+' · '+esc(r.cargo):'Colaborador '+(i+1)+' · '+esc(r.cargo),aca)).join('')):'');
+return{nome:`indicadores-${set}-${p=='mes'?$('rMes').value:new Date().toISOString().slice(0,10)}`,html:doc(`Desligamentos · ${nv=='area'?'Área ':''}${set}`,(p=='mes'?'Fechamento de ':'Período: ')+esc(per),[[nv=='area'?'Área':'Setor',esc(set)],['Período',esc(per)]],corpo),vazio:!n}}
+function relGerar(){const r=relHTML(),m=$('rMsgBox');if(!r){m.textContent='Escolha uma entrevista.';m.className='msg err';return null}m.className='msg';if(r.vazio){m.textContent='Atenção: não há entrevistas neste período. O relatório vai sair só com a evolução mensal.';m.className='msg err'}return r}
+$('rVer').onclick=()=>{const r=relGerar();if(!r)return;$('rPrev').classList.remove('hide');$('rFrame').srcdoc=r.html};
+$('rBaixar').onclick=async()=>{const r=relGerar();if(!r)return;await salvarArquivo(r.nome.toLowerCase().normalize('NFD').replace(/[^a-z0-9]+/g,'-')+'.html',r.html,'text/html','rMsgBox');if($('rMsgBox').classList.contains('ok'))$('rMsgBox').textContent='Relatório baixado. Abra o arquivo e use Ctrl+P → Salvar como PDF para enviar ao gestor.'};
+
+/* ---------- geral ---------- */
+function render(){if(colab)return;renderDash();renderHist();rRender()}
+['fArea','fSet','fPer','hTipo'].forEach(i=>$(i).onchange=render);$('busca').oninput=renderHist;
+setModo('rh');setRTipo('ind');limpar();
+$('hlogo').src=LOGO;
+aplicarPapel();
+const RH_EMAILS=["rhmdf01@sudati.com.br", "estagiodpmdf.01@sudati.com.br", "estagiodhomdf.01@sudati.com.br", "rhmdf.02@sudati.com.br", "fabiani@sudati.com.br", "mayara@sudati.com.br"];
+window.iniciarApp=function(fb){db=fb.db;
+ const enviar=async()=>{const em=$('loginEmail').value.trim().toLowerCase();if(!RH_EMAILS.includes(em)){$('loginTxt').textContent='Este e-mail não tem acesso à plataforma. Confira se digitou o e-mail do RH corretamente.';return}
+  $('btnLogin').disabled=true;try{await fb.enviarLink(em);$('loginTxt').innerHTML='Pronto! Enviamos um link para <b>'+esc(em)+'</b>. Abra seu Outlook e clique no link (confira também a caixa de spam). Abra o link neste mesmo navegador.'}catch(e){$('loginTxt').textContent='Não foi possível enviar o link: '+(e.code||e.message)}finally{$('btnLogin').disabled=false}};
+ $('btnLogin').onclick=enviar;$('loginEmail').onkeydown=e=>{if(e.key=='Enter')enviar()};
+ fb.concluirLink().catch(e=>{$('loginTxt').textContent='Link inválido ou expirado. Peça um novo link. ('+(e.code||e.message)+')'});
+ $('btnSair').onclick=()=>fb.sair();
+ let unsub=null;
+ fb.aoMudarUsuario(u=>{if(unsub){unsub();unsub=null}dados=[];
+  const email=(u&&u.email||'').toLowerCase();admin=!!u&&RH_EMAILS.includes(email);
+  $('btnSair').classList.toggle('hide',!u);$('loginBox').classList.toggle('hide',!!u);
+  $('loginTxt').textContent=!u?'Digite seu e-mail do RH. Você vai receber um link de acesso no Outlook.':admin?'':'O e-mail '+email+' não tem acesso a esta plataforma. Clique em Sair e entre com o e-mail do RH.';
+  aplicarPapel();if(!admin)return;
+  unsub=db.collection('entrevistas').onSnapshot(s=>{dados=s.docs.map(x=>({id:x.id,...x.data()}));render()},e=>alert('Erro ao carregar entrevistas: '+(e.code||e.message)));render()})};
+if(window.fbPronto)window.iniciarApp(window.fbPronto);
+</script>
+
+<script type="module">
+import {initializeApp} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import {getFirestore,collection,doc,setDoc,deleteDoc,onSnapshot} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import {getAuth,sendSignInLinkToEmail,isSignInWithEmailLink,signInWithEmailLink,signOut,onAuthStateChanged,browserLocalPersistence,setPersistence} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import {firebaseConfig} from "./config.js";
+const app=initializeApp(firebaseConfig),fs=getFirestore(app),auth=getAuth(app);
+setPersistence(auth,browserLocalPersistence);
+const K="emailParaLogin",ls={get:()=>{try{return localStorage.getItem(K)}catch(e){return null}},set:v=>{try{localStorage.setItem(K,v)}catch(e){}},del:()=>{try{localStorage.removeItem(K)}catch(e){}}};
+const urlBase=location.origin+location.pathname;
+const limpa=o=>JSON.parse(JSON.stringify(o));
+const db={collection:n=>({doc:id=>({set:d=>setDoc(doc(fs,n,id),limpa(d)),delete:()=>deleteDoc(doc(fs,n,id))}),
+ onSnapshot:(cb,err)=>onSnapshot(collection(fs,n),s=>cb({docs:s.docs.map(d=>({id:d.id,data:()=>d.data()}))}),err)})};
+const fb={db,enviarLink:async em=>{await sendSignInLinkToEmail(auth,em,{url:urlBase,handleCodeInApp:true});ls.set(em)},
+ concluirLink:async()=>{if(!isSignInWithEmailLink(auth,location.href))return;let em=ls.get();if(!em)em=(prompt("Para confirmar, digite o e-mail em que você recebeu o link:")||"").trim().toLowerCase();if(!em)return;await signInWithEmailLink(auth,em,location.href);ls.del();history.replaceState(null,"",urlBase)},sair:()=>signOut(auth),aoMudarUsuario:cb=>onAuthStateChanged(auth,cb)};
+window.fbPronto=fb;if(window.iniciarApp)window.iniciarApp(fb);
+</script>
+</body></html>

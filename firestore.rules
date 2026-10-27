@@ -1,0 +1,19 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // E-mails do RH com acesso à plataforma. Para incluir ou remover alguém,
+    // edite esta lista E a lista RH_EMAILS no index.html.
+    function ehRH() {
+      return request.auth != null
+        && request.auth.token.email_verified == true
+        && request.auth.token.email.lower() in ["rhmdf01@sudati.com.br", "estagiodpmdf.01@sudati.com.br", "estagiodhomdf.01@sudati.com.br", "rhmdf.02@sudati.com.br", "fabiani@sudati.com.br", "mayara@sudati.com.br"];
+    }
+    match /entrevistas/{id} {
+      allow read, write: if ehRH();
+    }
+    // Qualquer outro caminho fica fechado.
+    match /{caminho=**} {
+      allow read, write: if false;
+    }
+  }
+}
